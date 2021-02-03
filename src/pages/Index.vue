@@ -45,7 +45,7 @@ export default {
       this.items = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30].map(function (k, idx) {
         return {
           n: idx + ':' + vm.per[Math.floor(Math.random() * vm.per.length)],
-          top: k * 60,
+          top: k * 55,
           left: 50 + 30 * Math.sin(k * 3.14 / 8 - 4 * 3.14 / 8)
         }
       })
