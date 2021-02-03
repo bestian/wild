@@ -42,11 +42,11 @@ export default {
   methods: {
     start () {
       var vm = this
-      this.items = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30].map(function (k) {
+      this.items = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30].map(function (k, idx) {
         return {
-          n: vm.per[Math.floor(Math.random() * vm.per.length)],
-          top: k * 80,
-          left: 50 + 30 * Math.sin(k * 3.14 / 8)
+          n: idx + ':' + vm.per[Math.floor(Math.random() * vm.per.length)],
+          top: k * 60,
+          left: 50 + 30 * Math.sin(k * 3.14 / 8 - 4 * 3.14 / 8)
         }
       })
     }
@@ -60,8 +60,8 @@ export default {
 <style type="text/css" scoped="">
   .step {
     position: absolute;
-    width: 150px;
-    height: 150px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     border: 3px solid black;
     text-align: center;
