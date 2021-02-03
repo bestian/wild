@@ -1,7 +1,7 @@
 <template>
   <q-page class="">
-    <div class = "step" v-for = "i in items" :key="i.n" :style="{top: i.top + 'px', left:i.left + '%'}">
-        {{i.n}}
+    <div class = "step" v-for = "(i, idx) in items" :key="i.n" :style="{top: i.top + 'px', left:i.left + '%'}" @click = "check(now, idx)" :class = "{active: now == idx, dis: now !== idx}">
+        <span v-html = "i.n"></span>
     </div>
   </q-page>
 </template>
@@ -11,6 +11,7 @@ export default {
   name: 'PageIndex',
   data () {
     return {
+      now: 0,
       items: [
         {
           n: 'Hi'
@@ -40,11 +41,25 @@ export default {
     }
   },
   methods: {
+    check (n, idx) {
+      if (this.now === idx) {
+        this.now += this.items[idx].fun
+      }
+      if (this.now >= this.items.length) {
+        alert('You Win!')
+        this.now = 0
+      }
+    },
     start () {
       var vm = this
       this.items = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30].map(function (k, idx) {
+        var f = Math.floor(Math.random() * 5)
+        if (f === 0) {
+          f = 1
+        }
         return {
-          n: idx + ':' + vm.per[Math.floor(Math.random() * vm.per.length)],
+          fun: f,
+          n: idx + ':' + vm.per[Math.floor(Math.random() * vm.per.length)] + '<br/>' + (f >= 0 ? '向前' : '向後') + f + '步',
           top: k * 55,
           left: 50 + 30 * Math.sin(k * 3.14 / 8 - 4 * 3.14 / 8)
         }
@@ -69,5 +84,15 @@ export default {
     align-items: center;
     display: flex;
     background-color: white;
+  }
+
+  .active {
+    background-color: #cfc;
+  }
+
+  .dis {
+    background-color: white;
+    opacity: 1;
+    cursor: not-allowed;
   }
 </style>
